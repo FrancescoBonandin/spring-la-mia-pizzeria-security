@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+	<body>
+		
+		<div th:fragment="head(title)">
+				
+				<meta charset="utf-8">
+				<meta name="viewport" content="width=device-width, initial-scale=1">
+				<link th:rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.2/css/bootstrap.min.css}"/>
+				<link th:rel="stylesheet" th:href="@{/Css.css}"/>
+
+				<title>[[${title}]]</title>
+				
+		</div>
+		
+	<header class="mb-4" th:fragment="header()">
+				
+		<div class="container-fluid border-1">
+			
+			<div class="row">
+				
+				<div class="col-3 border">
+					<h1>
+						best pizza 
+					</h1>
+				</div>
+				
+				<div class="col-9 border">
+					
+					<div class="row h-100 justify-content-start align-items-center">
+						
+						<div class="col-auto" th:insert="pizza/Frags :: button('/ingrediente/','ingredienti')"></div>
+			
+						
+					</div>
+			
+				</div>
+				
+			</div>
+			
+		</div>
+		
+	</header>
+	
+		<a
+			th:fragment="button(link , title)"
+			th:href="@{${link}}"
+			
+			class="btn btn-primary"
+			>
+			[[${title}]]
+		</a>
+		
+		<div  th:fragment="errorDiv(field)"
+		     th:if="${#fields.hasErrors(field)}">
+		     
+			<ul class="text-start col-12 alert alert-danger">
+			   <li  
+			   		th:each="err : ${#fields.errors(field)}">
+			   		[[${err}]]	
+			   	</li>
+			</ul>
+			
+		</div>
+	
+	</body>
+</html>

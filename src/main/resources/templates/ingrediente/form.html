@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head th:replace="pizza/Frags :: head(${title})" >
+	
+</head>
+<body data-bs-theme="dark">
+	
+	<th:block th:replace="pizza/Frags :: header()"></th:block>
+	
+	
+	<div class="container">
+		
+		<div class="row justify-content-center">
+			
+			<div class="card col-6 text-center">
+				
+				<h3 class="card-title" >[[${title}]] 
+					
+				<span th:if="${ingrediente.nome}==null"> a New Ingrediente </span>
+				
+				<span th:if="${ingrediente.nome}!=null">[[${ingrediente.nome}]]</span>
+				
+				</h3> 
+				
+				
+				<div ass="card-body row justify-content-center">
+					
+					<form class="col" th:object="${ingrediente}"
+						  method="POST" >
+						
+						<div>
+					
+							<label class="form-label" for="nome">
+								Nome
+							</label>
+								
+							<input class="mb-2 form-control" type="text" id="nome" name="nome" placeholder="nome" th:field="*{nome}">
+							
+							<th:block th:replace="pizza/Frags::errorDiv('nome')"></th:block>
+							
+						</div>
+						
+					<!--#TEST RELATION NOT SAVED
+						<div th:each="pizza : ${pizzas}" th:object="${pizza}">
+			
+							<label class="form-label" th:for="'pizza-'+ *{id}" >
+								[[*{nome}]]
+							</label>
+							
+							<input  type="checkbox" th:id="'pizza-'+ *{id}" th:value="*{id}" th:field="${ingrediente.pizzas}">
+				
+							
+						</div> -->
+												
+						<div class=" mb-4 row justify-content-evenly">
+							
+							<input class="btn btn-success col-auto" type="submit" th:value="${title}">
+							
+							<input class="btn btn-warning col-auto" type="reset">
+							
+						</div>
+					
+					</form>
+					
+				</div>
+				
+			</div>
+			
+					<div class="text-center my-4" th:insert="pizza/Frags :: button('/' , 'home')" ></div>
+			
+		</div>
+		
+		
+		
+	</div>
+
+</body>
+
+</html>

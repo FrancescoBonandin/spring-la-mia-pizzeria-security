@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head th:replace="pizza/Frags :: head(${title})" >
+	
+</head>
+<body data-bs-theme="dark">
+	
+	<th:block th:replace="pizza/Frags :: header()"></th:block>
+	
+	
+	<div class="container">
+		
+		<div class="row justify-content-center">
+			
+			<div class="card col-6 text-center">
+				
+				<h3 class="card-title" >[[${title}]] 
+					
+				<span th:if="${pizza.nome}==null"> a New Pizza </span>
+				
+				<span th:if="${pizza.nome}!=null">[[${pizza.nome}]]</span>
+				
+				</h3> 
+				
+				
+				<div ass="card-body row justify-content-center">
+					
+					<form class="col" th:object="${pizza}"
+						  method="POST" >
+						
+						<div>
+					
+							<label class="form-label" for="nome">
+								Nome
+							</label>
+								
+							<input class="mb-2 form-control" type="text" id="nome" name="nome" placeholder="nome" th:field="*{nome}">
+							
+							<th:block th:replace="pizza/Frags::errorDiv('nome')"></th:block>
+							
+						</div>
+						
+						<div>
+			
+							<label class="form-label" for="descrizione">
+								Descrizione
+							</label>
+							
+							<textarea class="mb-2 form-control" id="descrizione" name="descrizione" placeholder="descrizione" th:field="*{descrizione}"></textarea>
+							
+						</div>
+						
+						<div>
+			
+							<label class="form-label" for="fotoUrl">
+								Foto Url
+							</label>
+							
+							<input class="mb-2 form-control" type="text" id="fotoUrl" name="fotoUrl" placeholder="fotoUrl" th:field="*{fotoUrl}">
+							
+						</div>
+						
+						<div>
+			
+							<label class="form-label" for="prezzo">
+								Prezzo
+							</label>
+							
+							<input class="mb-2 form-control" type="number" id="prezzo" name="prezzo" placeholder="prezzo" step="0.01" th:field="*{prezzo}">
+							
+							<th:block th:replace="pizza/Frags::errorDiv('prezzo')"></th:block>
+							
+						</div>
+						
+						<div th:each="ingrediente : ${ingredienti}" th:object="${ingrediente}">
+			
+							<label class="form-label" th:for="'ingrediente-'+ *{id}" >
+								[[*{nome}]]
+							</label>
+							
+							<input type="checkbox" th:id="'ingrediente-'+ *{id}" th:value="*{id}" th:field="${pizza.ingredienti}">
+				
+							
+						</div>
+						
+						<div class=" mb-4 row justify-content-evenly">
+							
+							<input class="btn btn-success col-auto" type="submit" th:value="${title}">
+							
+							<input class="btn btn-warning col-auto" type="reset">
+							
+						</div>
+					
+					</form>
+					
+				</div>
+				
+			</div>
+			
+					<div class="text-center my-4" th:insert="pizza/Frags :: button('/' , 'home')" ></div>
+			
+		</div>
+		
+		
+		
+	</div>
+
+</body>
+
+</html>

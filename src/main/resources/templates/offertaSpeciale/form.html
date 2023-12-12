@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head th:replace="pizza/Frags :: head('OffertaSpeciale')" >
+	
+</head>
+<body  data-bs-theme="dark">
+	
+	<th:block th:replace="pizza/Frags :: header()"></th:block>
+	
+	
+		<div class="container">
+		
+		<div class="row justify-content-center">
+			
+			<div class="card col-6 text-center">
+				
+				<h3 class="card-title" >[[${title}]] 
+					
+				<span th:if="${offertaSpeciale.titolo}==null"> a New Special Offer </span>
+				
+				<span th:if="${offertaSpeciale.titolo}!=null">[[${offertaSpeciale.titolo}]]</span>
+				
+				</h3> 
+				
+				
+				<div ass="card-body row justify-content-center">
+					
+					<form class="col" th:object="${offertaSpeciale}"
+						  method="POST" >
+						
+						<div>
+					
+							<label class="form-label" for="titolo">
+								Titolo
+							</label>
+								
+							<input class="mb-2 form-control" type="text" id="titolo" name="titolo" placeholder="titolo" th:field="*{titolo}">
+							
+							<th:block th:replace="pizza/Frags::errorDiv('titolo')"></th:block>
+							
+						</div>
+						
+						<div>
+			
+							<label class="form-label" for="dataDiInizio">
+								Data Di Inizio
+							</label>
+							
+							<input class="mb-2 form-control" type="date" id="dataDiInizio" name="dataDiInizio"  th:value="*{dataDiInizio}"  >
+							
+							<th:block th:replace="pizza/Frags::errorDiv('dataDiInizio')"></th:block>
+						</div>
+						
+						<div>
+			
+							<label class="form-label" for="dataDiFine">
+								Data Di Fine
+							</label>
+							
+							<input class="mb-2 form-control" type="date" id="dataDiFine" name="dataDiFine"  th:value="*{dataDiFine}"  >
+							
+							<th:block th:replace="pizza/Frags::errorDiv('dataDiFine')"></th:block>
+							
+						</div>
+						
+						
+						<div class=" mb-4 row justify-content-evenly">
+							
+							<input class="btn btn-success col-auto" type="submit" th:value="${title}">
+							
+							<input class="btn btn-warning col-auto" type="reset">
+							
+						</div>
+					
+					</form>
+					
+				</div>
+				
+			</div>
+			
+					<div class="text-center my-4" th:insert="pizza/Frags :: button('/' , 'home')" ></div>
+			
+		</div>
+		
+		
+		
+	</div>
+
+</body>
+</html>

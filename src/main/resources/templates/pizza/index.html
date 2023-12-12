@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head th:replace="pizza/Frags :: head('MyPizzeria')" >
+	
+</head>
+
+<body  data-bs-theme="dark">
+	
+	
+	<th:block th:replace="pizza/Frags :: header()"></th:block>
+	
+	<main>
+		
+		
+		
+		<div class="container-xl">
+			
+			<form>
+				
+				<input type="text" id="searchbar" name="q" placeholder="search..." th:value="${q}">
+				
+				<input type="submit">
+				
+			</form>
+			
+			<h1 class="text-center">
+				Best of the pizzas 
+			</h1>
+			
+			<div class=" my-4 row justify-content-center">
+				
+				<h3 class="text-center">
+					my menù
+				</h3>
+				
+				<h4 class="col-12 text-center" th:if="${pizzas == null || pizzas.size() == 0}">
+					nessuna pizza presente nel menù
+				</h4>
+				
+				<ul th:if="${pizzas != null && pizzas.size() > 0}" class="col-12">
+					
+					
+					<li class="row mb-3 align-items-center" th:each="pizza : ${pizzas}">
+						
+						<img class="img-fluid col-3" th:src="@{${pizza.getFotoUrl()}}">
+						
+						<div class="col" >id: [[${pizza.getId()}]]</div>
+						
+						<div class="col" >nome: [[${pizza.getNome()}]]</div>
+						
+						<div class="col"> [[${pizza.getDescrizione()}]] </div>
+						
+						<div class="col" >[[${pizza.getPrezzo()}]] €</div>
+						
+						
+						<div class="col" th:insert="pizza/Frags :: button('/pizza/'+ ${pizza.getId()} , 'show')" ></div>
+						
+						<div class="col" th:insert="pizza/Frags :: button('/pizza/edit/'+ ${pizza.getId()} , 'edit')" ></div>
+						
+						<form class="col" method="POST" th:action="@{'/pizza/delete/{id}'  (id=${pizza.id})}">
+							
+							<input class="btn btn-danger" type="submit" value="delete">
+							
+						</form>
+						
+						
+						
+					</li>
+					
+				</ul>
+
+				<div th:if="${deletedPizza != null} " class="alert alert-danger">[[${deletedPizza.nome}]] have been deleted successfully! </div>
+				
+				<div class="col-auto" th:insert="pizza/Frags :: button('/pizza/create' , 'Create')" ></div>
+				
+			</div>
+			
+			
+		</div>
+		
+		
+	</main>
+		
+	
+	
+	
+	<script th:src="@{/webjars/bootstrap/5.3.2/js/bootstrap.bundle.min.js}"></script>
+</body>
+</html>

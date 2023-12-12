@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+<head th:replace="pizza/Frags :: head(${pizza.getNome()})" >
+</head>
+<body data-bs-theme="dark">
+	
+	<div th:replace="pizza/Frags :: header()"></div>
+	
+	<div class="container">
+			
+			
+			<div class=" my-4 row justify-content-center">
+				
+				<div class="" th:insert="pizza/Frags :: button('/pizza/' + ${pizza.id} + '/offertaSpeciale/create' , 'Create New Offerta Speciale')" ></div>
+				
+				<div class="col-6">
+					
+					<div class="card" th:object="${pizza}">
+						
+						
+						
+						<img class="img-fluid card-img-top" th:src="@{${pizza.getFotoUrl()}}">
+						
+						<div class="card-body">
+							
+							<div >id: [[${pizza.getId()}]]</div>
+							
+							<div >nome: [[${pizza.getNome()}]]</div>
+							
+							<div >descrizione: [[${pizza.getDescrizione()}]] </div>
+							
+							<div >prezzo: [[${pizza.getPrezzo()}]] €</div>
+							
+							<ul  th:if=" ${pizza.offertaSpeciale.size()} > 0 " >
+								
+								offerte:
+							
+								<li th:each="offerta : *{offertaSpeciale}">
+									
+									<div class=" row ">
+										
+										<div class="col-auto">
+											[[${offerta.titolo}]]
+										</div>
+										
+										<div class="col-auto" th:insert="pizza/Frags::button('/pizza/'+${pizza.id} +'/offertaSpeciale/edit/' + ${offerta.id} , 'edit')"></div>
+									
+										<form class="col-auto" method="POST" th:action="@{/pizza/{pizza_id}/offertaSpeciale/delete/{id}  (pizza_id=${pizza.id}, id=${offerta.id})}">
+								
+											<input class="btn btn-danger" type="submit" value="delete">
+											
+										</form>
+										
+									</div>
+									
+								</li>
+						
+							</ul>
+							
+							<ul  th:if=" ${pizza.ingredienti.size()} > 0 " >
+								
+								ingredienti:
+							
+								<li th:each="ingrediente : *{ingredienti}">
+									
+									<div  class=" row ">
+										
+										<div class="col-auto">
+											[[${ingrediente.nome}]]
+										</div>
+										
+										<div class="col-auto" th:insert="pizza/Frags::button('/ingrediente/edit/' + ${ingrediente.id} , 'edit')"></div>
+									
+										<form class="col-auto" method="POST" th:action="@{/ingrediente/delete/{id}  ( id=${ingrediente.id})}">
+								
+											<input class="btn btn-danger" type="submit" value="delete">
+											
+										</form>
+										
+									</div>
+									
+								</li>
+						
+							</ul>
+							
+						</div>
+						
+						<div class="text-center my-4" th:insert="pizza/Frags :: button('/' , 'home')" ></div>
+
+					</div>
+				</div>
+			</div>
+	</div>
+</body>
+</html>
