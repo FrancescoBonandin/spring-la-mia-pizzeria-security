@@ -12,7 +12,7 @@
 			
 			<div class=" my-4 row justify-content-center">
 				
-				<div class="" th:insert="pizza/Frags :: button('/pizza/' + ${pizza.id} + '/offertaSpeciale/create' , 'Create New Offerta Speciale')" ></div>
+				<div sec:authorize="hasAuthority('ADMIN')" class="" th:insert="pizza/Frags :: button('/pizza/' + ${pizza.id} + '/offertaSpeciale/create' , 'Create New Offerta Speciale')" ></div>
 				
 				<div class="col-6">
 					
@@ -44,9 +44,9 @@
 											[[${offerta.titolo}]]
 										</div>
 										
-										<div class="col-auto" th:insert="pizza/Frags::button('/pizza/'+${pizza.id} +'/offertaSpeciale/edit/' + ${offerta.id} , 'edit')"></div>
+										<div class="col-auto" sec:authorize="hasAuthority('ADMIN')" th:insert="pizza/Frags::button('/pizza/'+${pizza.id} +'/offertaSpeciale/edit/' + ${offerta.id} , 'edit')"></div>
 									
-										<form class="col-auto" method="POST" th:action="@{/pizza/{pizza_id}/offertaSpeciale/delete/{id}  (pizza_id=${pizza.id}, id=${offerta.id})}">
+										<form class="col-auto" sec:authorize="hasAuthority('ADMIN')" method="POST" th:action="@{/pizza/{pizza_id}/offertaSpeciale/delete/{id}  (pizza_id=${pizza.id}, id=${offerta.id})}">
 								
 											<input class="btn btn-danger" type="submit" value="delete">
 											
@@ -70,9 +70,9 @@
 											[[${ingrediente.nome}]]
 										</div>
 										
-										<div class="col-auto" th:insert="pizza/Frags::button('/ingrediente/edit/' + ${ingrediente.id} , 'edit')"></div>
+										<div class="col-auto" sec:authorize="hasAuthority('ADMIN')" th:insert="pizza/Frags::button('/ingrediente/edit/' + ${ingrediente.id} , 'edit')"></div>
 									
-										<form class="col-auto" method="POST" th:action="@{/ingrediente/delete/{id}  ( id=${ingrediente.id})}">
+										<form class="col-auto" sec:authorize="hasAuthority('ADMIN')" method="POST" th:action="@{/ingrediente/delete/{id}  ( id=${ingrediente.id})}">
 								
 											<input class="btn btn-danger" type="submit" value="delete">
 											

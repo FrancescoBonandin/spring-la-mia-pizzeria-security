@@ -29,8 +29,11 @@
 					
 					<div class="row h-100 justify-content-start align-items-center">
 						
-						<div class="col-auto" th:insert="pizza/Frags :: button('/ingrediente/','ingredienti')"></div>
+						<div sec:authorize="hasAuthority('ADMIN')" class="col-auto" th:insert="pizza/Frags :: button('/ingrediente/','ingredienti')"></div>
+						
+						<div class="text-center my-4" th:insert="pizza/Frags :: button('/' , 'home')" ></div>
 			
+						<div class="col-auto" th:insert="pizza/Frags :: button('/logout','logout')"></div>
 						
 					</div>
 			

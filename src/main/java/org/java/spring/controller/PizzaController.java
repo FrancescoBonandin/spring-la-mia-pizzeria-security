@@ -34,7 +34,7 @@ public class PizzaController {
 	@Autowired
 	private IngredienteService ingredienteService;
 
-	@GetMapping("/")
+	@GetMapping
 	public String routeIndex(Model model, @RequestParam(required=false) String q ) {
 		
 		List<Pizza> pizzas = q==null
